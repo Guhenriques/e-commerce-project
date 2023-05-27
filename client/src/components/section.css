@@ -1,0 +1,58 @@
+@import '../index.css';
+
+.flashy-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flashy-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.flashy-arrow:hover {
+  background-color: #ddd;
+}
+
+.flashy-arrow:first-child {
+  left: 10px;
+}
+
+.flashy-arrow:last-child {
+  right: 10px;
+}
+
+.flashy-img {
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.flashy-content {
+  text-align: center;
+  color: #333;
+}
+
+.flashy-content h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.flashy-content p {
+  font-size: 18px;
+  margin: 0;
+}
