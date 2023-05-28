@@ -11,10 +11,19 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.flashy-arrow {
+.flashy-arrows {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+  z-index: 1;
+}
+
+.flashy-arrow {
   font-size: 24px;
   color: #333;
   cursor: pointer;
@@ -27,24 +36,21 @@
   background-color: #ddd;
 }
 
-.flashy-arrow:first-child {
-  left: 10px;
-}
-
-.flashy-arrow:last-child {
-  right: 10px;
-}
-
-.flashy-img {
-  width: 350px;
-  height: auto;
-  object-fit: contain;
-  margin-bottom: 20px;
-}
-
 .flashy-content {
   text-align: center;
   color: #333;
+}
+
+.flashy-img {
+  width: 450px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.flashy-img.transitioning {
+  opacity: 0;
 }
 
 .flashy-content h1 {
