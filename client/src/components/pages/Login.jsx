@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import Logo from '../Logo';
+import NavBar from '../NavBar';
 
 import './login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -31,14 +36,16 @@ const Login = () => {
         throw new Error(errorData.error);
       }
 
-      // Login successful
+      // Login successful      
       const data = await response.json();
       console.log('User logged in with ID:', data.id);
+
+      navigate('/dashboard');
 
       // Redirect the user to the dashboard or perform any other necessary actions
     } catch (error) {
       console.error('Login failed:', error.message);
-      // Handle error
+      setError(error.message); // Set the error message to display to the user
     }
   };
 
@@ -59,9 +66,13 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="login-header"></div>
+      <div className="login-header">
+      <Logo />
+      <NavBar />
+      </div>
       <div className="login-container">
         <h2>Login</h2>
+        {error && <p className="error-message">{error}</p>} {/* Display the error message */}
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email:</label>
           <input

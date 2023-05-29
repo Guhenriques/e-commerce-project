@@ -7,6 +7,7 @@ import Main from './components/Main';
 
 import Registration from './components/pages/Register';
 import Login from './components/pages/Login';
+import Dashboard from './components/pages/DashBoard';
 import CartList from './components/pages/Cart';
 import ProductDetails from './components/pages/ProductDetails';
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/users/register" element={<Registration />} />
         <Route path="users/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cart" element={<CartList />} />
       </Routes>
     </Router>

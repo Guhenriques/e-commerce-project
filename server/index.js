@@ -15,6 +15,9 @@ const loginRouter = require('./routes/authRoute');
 const passport = require('passport');
 const session = require('express-session');
 
+app.use(express.json());
+
+// Configure session middleware
 app.use(session({
   secret: 'secretrestapi',
   resave: false,
@@ -30,16 +33,29 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Initialize Passport
 app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(express.json());
+// Configure session serialization and deserialization
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
 
+passport.deserializeUser(function (id, done) {
+  // Retrieve the user from the database based on the id
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+// Route handlers and middlewares
 app.use('/users', usersRoutes);
 app.use('/products', productsRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/checkout', checkoutRoutes);
-app.use('/login', loginRouter);
+app.use('/users/login', loginRouter);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
@@ -47,6 +63,7 @@ app.get('/', (request, response) => {
   response.json({ info: 'This is my E-commerce Rest API!' })
 })
 
+// Start the server
 app.listen(port, () =>
   console.log(`Example app listening on port ${port}!`),
 );

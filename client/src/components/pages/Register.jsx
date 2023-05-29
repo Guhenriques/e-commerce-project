@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Logo from '../Logo';
+import NavBar from '../NavBar';
+
 import './register.css'
 
 const Registration = () => {
@@ -64,13 +67,13 @@ const Registration = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (!response.ok) {
         // Handle authentication error
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
-  
+
       // Authentication successful
       // Redirect the user to the logged-in page or perform any other necessary actions
       window.location.href = '/logged-in'; // Example redirect to '/logged-in' page
@@ -99,12 +102,14 @@ const Registration = () => {
   return (
     <div className="registration">
       <div className='register-header'>
+        <Logo />
+        <NavBar />
       </div>
       <div className='register-container'>
         <h2>Create an Account</h2>
         {error && <p className="error-message">{error}</p>} {/* Display the error message */}
         <label htmlFor="name">Name:</label>
-        <input 
+        <input
           type="text"
           id="name"
           value={name}
