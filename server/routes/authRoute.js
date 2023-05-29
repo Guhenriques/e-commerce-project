@@ -8,6 +8,5 @@ router.post('/', passport.authenticate('local'), (req, res) => {
   res.json({ message: 'Login successful' });
 });
 
-
 module.exports = router;
 

@@ -9,14 +9,13 @@ router.get('/', usersController.index);
 router.get('/:id', usersController.show);
 
 // Create a new user
-router.post('/', usersController.create);
+router.post('/register', usersController.create);
 
 // Update user
 router.put('/:id', usersController.update);
 
 // Delete user
 router.delete('/:id', usersController.destroy);
-
 
 //export the router
 module.exports = router;
