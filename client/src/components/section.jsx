@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
-import keyboard from '../images/keyboard.png';
+import keyboard from '../images/new-keyboard-minor.png';
 import mouse from '../images/mouse.png';
 import monitor from '../images/monitor.png';
 
@@ -15,9 +15,9 @@ const Section = () => {
     { image: monitor, title: 'Immersive and high-resolution monitor', price: 'Great value for money!' },
   ];
 
-  const [currentProduct, setCurrentProduct] = React.useState(0);
-  const [imageHeight, setImageHeight] = React.useState(null);
-  const [transitioning, setTransitioning] = React.useState(false);
+  const [currentProduct, setCurrentProduct] = useState(0);
+  const [imageHeight, setImageHeight] = useState(null);
+  const [transitioning, setTransitioning] = useState(false);
 
   const handlePrevProduct = () => {
     if (!transitioning) {
@@ -43,13 +43,23 @@ const Section = () => {
     setImageHeight(event.target.offsetHeight);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNextProduct();
+    }, 6000); // Change the interval duration as needed
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div className="flashy-container">
       <div className="flashy-arrows">
         <Button className="flashy-arrow" onClick={handlePrevProduct} startIcon={<KeyboardArrowLeft />} />
         <Button className="flashy-arrow" onClick={handleNextProduct} endIcon={<KeyboardArrowRight />} />
       </div>
-      <div className="flashy-content"> 
+      <div className="flashy-content">
         <img
           className={`flashy-img ${transitioning ? 'transitioning' : ''}`}
           src={products[currentProduct].image}
