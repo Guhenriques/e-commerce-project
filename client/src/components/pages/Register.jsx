@@ -7,6 +7,8 @@ const Registration = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -27,7 +29,7 @@ const Registration = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (!response.ok) {
@@ -40,9 +42,41 @@ const Registration = () => {
       const data = await response.json();
       console.log('User registered with ID:', data.id);
 
+      // Authenticate the user and create a session
+      await handleAuthentication(email, password);
+
       // Redirect the user to the login page or perform any other necessary actions
+      window.location.href = '/dashboard'; // Example redirect to '/logged-in' page
+
     } catch (error) {
       console.error('Registration failed:', error.message);
+      setError(error.message); // Set the error message to display to the user
+      // Handle error
+    }
+  };
+
+  const handleAuthentication = async (email, password) => {
+    try {
+      const response = await fetch('http://localhost:8000/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (!response.ok) {
+        // Handle authentication error
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+  
+      // Authentication successful
+      // Redirect the user to the logged-in page or perform any other necessary actions
+      window.location.href = '/logged-in'; // Example redirect to '/logged-in' page
+
+    } catch (error) {
+      console.error('Authentication failed:', error.message);
       // Handle error
     }
   };
@@ -57,6 +91,7 @@ const Registration = () => {
       console.error('Registration failed: ', error.message)
     }
     // Reset form fields
+    setName('');
     setEmail('');
     setPassword('');
   };
@@ -67,6 +102,7 @@ const Registration = () => {
       </div>
       <div className='register-container'>
         <h2>Create an Account</h2>
+        {error && <p className="error-message">{error}</p>} {/* Display the error message */}
         <label htmlFor="name">Name:</label>
         <input 
           type="text"
@@ -94,7 +130,7 @@ const Registration = () => {
           <button type="submit">Register</button>
         </form>
         <p>
-          Already have an account? Click <Link to="/login">here</Link> to sign in.
+          Already have an account? Click <Link to="/users/login">here</Link> to sign in.
         </p>
       </div>
     </div>
