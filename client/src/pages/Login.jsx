@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import Logo from '../Logo';
-import NavBar from '../NavBar';
+import Logo from '../components/Logo';
+import NavBar from '../components/NavBar';
 
 import './login.css';
 
@@ -30,6 +30,8 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('Response do Login:', response)
+
       if (!response.ok) {
         // Handle login error
         const errorData = await response.json();
@@ -37,8 +39,10 @@ const Login = () => {
       }
 
       // Login successful      
-      const data = await response.json();
-      console.log('User logged in with ID:', data.id);
+      const user = await response.json();
+      console.log('User logged in with ID:', user.id);
+
+      console.log('Response do User:', user)
 
       navigate('/dashboard');
 
@@ -67,8 +71,8 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-header">
-      <Logo />
-      <NavBar />
+        <Logo />
+        <NavBar />
       </div>
       <div className="login-container">
         <h2>Login</h2>

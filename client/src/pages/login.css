@@ -1,11 +1,11 @@
-@import '../../index.css';
+@import '../index.css';
 
-.registration {
+.login {
   margin: auto;
   text-align: center;
 }
 
-.register-header {
+.login-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,7 +16,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.register-container {
+.login-container {
   max-width: 400px;
   margin: 20px auto;
   padding: 20px;
@@ -25,19 +25,18 @@
   background-color: #fff;
 }
 
-.register-container h2 {
+.login-container h2 {
   margin-bottom: 20px;
 }
 
-.register-container label {
+.login-container label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-.register-container input[type="text"],
-.register-container input[type="email"],
-.register-container input[type="password"] {
+.login-container input[type="email"],
+.login-container input[type="password"] {
   width: 100%;
   padding: 10px 0px 10px 0px;
   margin-bottom: 20px;
@@ -45,7 +44,7 @@
   border-radius: 4px;
 }
 
-.register-container button[type="submit"] {
+.login-container button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: var(--blue-buttons-default);
@@ -55,24 +54,19 @@
   cursor: pointer;
 }
 
-.register-container button[type="submit"]:hover {
+.login-container button[type="submit"]:hover {
   background-color: var(--blue-buttons-dark);
 }
 
-.register-container p {
+.login-container p {
   margin-top: 20px;
 }
 
-.register-container p a {
+.login-container p a {
   color: var(--blue-buttons-default);
   text-decoration: none;
 }
 
-.register-container p a:hover {
+.login-container p a:hover {
   text-decoration: underline;
-}
-
-.error-message {
-  color: #e74343;
-  font-weight: bold;
 }

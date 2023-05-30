@@ -17,6 +17,9 @@ router.put('/:id', usersController.update);
 // Delete user
 router.delete('/:id', usersController.destroy);
 
+// Get the current authenticated user
+router.get('/current-user/:id', usersController.getCurrentUser);
+
 //export the router
 module.exports = router;
 

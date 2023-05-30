@@ -13,7 +13,13 @@ const index = (req, res, next) => {
 };
 
 const show = (req, res, next) => {
+  // Get the authenticated user ID from the session or token
+  console.log('Response do req', req.id)
+
+  // const userId = req.user.id;
+
   const id = parseInt(req.params.id);
+
 
   client.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
     if (error) {
@@ -22,6 +28,27 @@ const show = (req, res, next) => {
       res.status(200).json(results.rows);
     }
   });
+};
+
+const getCurrentUser = (req, res, next) => {
+  // Assuming you have implemented authentication and stored the user object in req.user
+  const currentUser = parseInt(req.params.id);
+
+  // Check if user is authenticated
+  if (!currentUser) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
+
+  client.query('SELECT * FROM users WHERE id = $1', [currentUser], (error, results) => {
+    if (error) {
+      next(error); // Pass the error to the error handling middleware
+    } else {
+      res.status(200).json(results.rows[0]);
+    }
+  });
+
+  // Return the current user's data
+  // return res.status(200).json(currentUser);
 };
 
 const create = async (req, res, next) => {
@@ -52,7 +79,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const id = parseInt(req.params.id);
-  const {email, password } = req.body;
+  const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   client.query(
@@ -88,4 +115,5 @@ module.exports = {
   create,
   update,
   destroy,
+  getCurrentUser
 };

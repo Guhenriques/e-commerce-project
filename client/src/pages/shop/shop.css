@@ -1,0 +1,75 @@
+@import '../../index.css';
+
+.shopTitle {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 40px;
+}
+.products {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+}
+
+.product {
+  border-radius: 10px;
+  width: 400px;
+  height: 400;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px #0000001a;
+  background-color: #f8f8f8;
+
+  transition: transform 0.8s ease;
+  overflow: hidden;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+}
+
+.product-card {
+  flex: 0 0 calc(25% - 20px); /* Adjust the flex value to control the number of cards per line */
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #0000001a;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  width: 350px; /* Set a fixed width for the cards */
+  height: 350px; /* Set a fixed height for the cards */
+}
+
+.product img {
+  width: 320px;
+}
+
+.product .description {
+  text-align: center;
+}
+
+.product:hover {
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+
+.addToCartBttn {
+  background-color: transparent;
+  border: 2px solid var(--default-black);
+  min-width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 15px;
+}
+
+.addToCartBttn:hover {
+  background-color: var(--default-black);
+  color: white;
+  cursor: pointer;
+}

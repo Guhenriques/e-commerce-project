@@ -7,7 +7,7 @@ const swaggerDocument = require('./swagger.json');
 
 const usersRoutes = require('./routes/usersRoutes');
 const productsRoutes = require('./routes/productsRoutes');
-const cartRoutes = require('./routes/cartRoutes');
+const cartRoutes = require('./routes/cartRoutes'); 
 const ordersRoutes = require('./routes/ordersRoutes');
 const checkoutRoutes = require('./routes/checkoutRoutes');
 const loginRouter = require('./routes/authRoute');
@@ -44,8 +44,12 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (id, done) {
   // Retrieve the user from the database based on the id
-  User.findById(id, function (err, user) {
-    done(err, user);
+  client.query('SELECT * FROM users WHERE id = $1', [id], function (err, result) {
+    if (err) {
+      return done(err);
+    }
+    const user = result.rows[0]; // Assuming the result returns a single user
+    done(null, user);
   });
 });
 

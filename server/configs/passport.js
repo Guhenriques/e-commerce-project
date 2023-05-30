@@ -4,11 +4,11 @@ const bcrypt = require('bcrypt');
 const client = require('../database/db');
 
 passport.use(new LocalStrategy(
-  { usernameField: 'email' }, // Assuming 'email' is the field for email in the request
+  { usernameField: 'email' },
   function verify(email, password, done) {
     client.query('SELECT * FROM users WHERE email = $1', [email], function (err, result) {
       if (err) { return done(err); }
-      const user = result.rows[0]; // Assuming the result returns a single user
+      const user = result.rows[0];
 
       if (!user) {
         return done(null, false, { message: 'Incorrect email or password.' });
@@ -19,7 +19,10 @@ passport.use(new LocalStrategy(
         if (!res) {
           return done(null, false, { message: 'Incorrect email or password.' });
         }
-        return done(null, user);
+
+        // Assign the user ID to req.user
+        const { id, ...userData } = user;
+        return done(null, { id, ...userData });
       });
     });
   }

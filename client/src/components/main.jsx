@@ -3,13 +3,13 @@ import './main.css';
 import { Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import keyboard from '../images/new-keyboard-minor.png';
-import mouse from '../images/mouse.png';
-import monitor from '../images/monitor-minor.png';
-import headset from '../images/headset-minor.png';
-import mousepad from '../images/mousepad2-minor.png';
+import keyboard from '../images/new-keyboard-minor.webp';
+import mouse from '../images/mouse-minor.webp';
+import monitor from '../images/monitor-minor.webp';
+import headset from '../images/headset-minor.webp';
+import mousepad from '../images/mousepad2-minor.webp';
 import soundbar from '../images/pc-soundbar-minor.png';
-import microphone from '../images/microphone-minor.png';
+import microphone from '../images/microphone-minor.webp';
 import webcam from '../images/webcam-minor.png';
 
 const Main = () => {

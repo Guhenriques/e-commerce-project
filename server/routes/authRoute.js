@@ -15,6 +15,10 @@ router.post('/', (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log(req.user); // test
+
+      console.log('(authRoute) User ID:', user.id); // test
+
       // Authentication succeeded, handle the response
       res.json({ message: 'Login successful' });
     });
