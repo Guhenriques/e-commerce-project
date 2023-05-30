@@ -5,16 +5,6 @@
   text-align: center;
 }
 
-.dashboard-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 150px;
-  background-color: var(--bg-header-color);
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .dashboard-container {
   margin: 20px;
 }

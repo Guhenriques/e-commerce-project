@@ -59,17 +59,18 @@
 
 .addToCartBttn {
   background-color: transparent;
-  border: 2px solid var(--default-black);
+  border: 2px solid var(--blue-buttons-dark);
   min-width: 100px;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 15px;
+  margin-bottom: 10px;
 }
 
 .addToCartBttn:hover {
-  background-color: var(--default-black);
+  background-color: var(--blue-buttons-dark);
   color: white;
   cursor: pointer;
 }

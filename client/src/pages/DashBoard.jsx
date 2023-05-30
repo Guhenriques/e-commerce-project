@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import './dashboard.css';
 
-import Logo from '../components/Logo';
-import NavBar from '../components/NavBar';
-
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,8 +41,6 @@ const Dashboard = () => {
   return (
     <div className='dashboard'>
       <div className='dashboard-header'>
-        <Logo />
-        <NavBar />
       </div>
       <div className='dashboard-container'>
         <h2>Dashboard</h2>

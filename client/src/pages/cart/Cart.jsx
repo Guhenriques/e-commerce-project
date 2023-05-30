@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PRODUCTS } from '../../Products';
+import { ShopContext } from '../../context/shop-context';
+import { CartItem } from './CartItem';
 
-import './cart.css'
+import { useNavigate } from 'react-router-dom';
 
-const Cart = () => {
-  // Assume you have an array of cart items
-  const cartItems = [
-    { id: 1, name: 'Product 1', price: 10 },
-    { id: 2, name: 'Product 2', price: 20 },
-    { id: 3, name: 'Product 3', price: 15 },
-  ];
+import './cart.css';
+
+export const Cart = () => {
+  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
+  const totalAmount = getTotalCartAmount();
+  
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <h2>Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              <span>{item.name}</span>
-              <span>{item.price}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className='cart'>
+      <div>
+      <h1>Your Cart Items</h1>
+      </div>
+      <div className='cartItems'>
+        {PRODUCTS.map((product) => { 
+          // if the product id is not equal to 0, is a product that is in the cart
+          if (cartItems[product.id] !== 0) {
+            return <CartItem data={product} key={product.id} />;
+          } else {
+            return null;
+          }
+        })}
+      </div>
+      {totalAmount > 0 ?
+        <div className='checkout'>
+          <p> Subtotal: £ {totalAmount} </p>
+          <button onClick={() => {navigate("/")}}> Continue Shopping </button>
+          <button> Checkout </button>
+        </div>
+      : <h2>Your Cart is Empty</h2>} 
     </div>
-  );
-};
+  )
 
-export default Cart;
+};

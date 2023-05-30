@@ -1,21 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './header.css';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const NavBar = () => {
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+import "./navbar.css";
+
+const Navbar = () => {
   return (
-    <div className="nav-bar">
-      <Link to="/">
-        <button className="nav-shop">Shop</button>
-      </Link>
-      <Link to="/cart">
-        <button className="nav-cart">Cart</button>
-      </Link>
-      <Link to="/users/register">
-        <button className="nav-account">Account</button>
-      </Link>
+    <div className="navbar">
+      <div className="links">
+        <Link to="/"> Shop </Link>
+        <Link to="/cart">
+          <ShoppingCartIcon size={32} />
+        </Link>
+        <Link to="/users/register"> Account </Link>
+      </div>
     </div>
   );
 };
 
-export default NavBar;
+export default Navbar;

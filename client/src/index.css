@@ -1,9 +1,9 @@
 :root {
   --default-white: #fff;
   --default-black: #181818;
-  --bg-header-color: #e0e0e0;
-  --blue-buttons-default: #1565dd;
-  --blue-buttons-dark: #044ab3;
+  --bg-header-color: #dddddf;
+  --blue-buttons-default: #5320e0;
+  --blue-buttons-dark: #2b1172;
   --bg-section-color: #faa352da;
 }
 

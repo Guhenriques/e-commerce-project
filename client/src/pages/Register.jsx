@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../components/Logo';
-import NavBar from '../components/NavBar';
-
 import './register.css'
 
 const Registration = () => {
@@ -11,7 +8,6 @@ const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -102,8 +98,6 @@ const Registration = () => {
   return (
     <div className="registration">
       <div className='register-header'>
-        <Logo />
-        <NavBar />
       </div>
       <div className='register-container'>
         <h2>Create an Account</h2>

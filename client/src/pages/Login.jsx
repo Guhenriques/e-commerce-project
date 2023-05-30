@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import Logo from '../components/Logo';
-import NavBar from '../components/NavBar';
-
 import './login.css';
 
 const Login = () => {
@@ -71,8 +68,6 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-header">
-        <Logo />
-        <NavBar />
       </div>
       <div className="login-container">
         <h2>Login</h2>

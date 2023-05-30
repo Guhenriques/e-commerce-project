@@ -1,3 +1,5 @@
+/* USING NEW SHOP COMPONENT INSTEAD OF MAIN
+
 import React from 'react';
 import './main.css';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -52,3 +54,5 @@ const Main = () => {
 };
 
 export default Main;
+
+*/
