@@ -13,14 +13,7 @@ const index = (req, res, next) => {
 };
 
 const show = (req, res, next) => {
-  // Get the authenticated user ID from the session or token
-  console.log('Response do req', req.id)
-
-  // const userId = req.user.id;
-
   const id = parseInt(req.params.id);
-
-
   client.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
     if (error) {
       next(error); // Pass the error to the error handling middleware
@@ -31,24 +24,26 @@ const show = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  // Assuming you have implemented authentication and stored the user object in req.user
-  const currentUser = parseInt(req.params.id);
-
+  const currentUser = parseInt(req.param.id); // Assuming the authenticated user object is stored in req.user
   // Check if user is authenticated
   if (!currentUser) {
     return res.status(401).json({ error: 'User not authenticated' });
   }
 
-  client.query('SELECT * FROM users WHERE id = $1', [currentUser], (error, results) => {
+  // Retrieve the user data based on the authenticated user's information
+  const userId = currentUser.id; // Assuming the user ID is stored in the id property of the user object
+  console.log('userId:', userId)
+  console.log('currentUser.id:', currentUser.id);
+  
+  // Query the database to fetch the user data based on the user ID
+  client.query('SELECT * FROM users WHERE id = $1', [userId], (error, results) => {
     if (error) {
       next(error); // Pass the error to the error handling middleware
     } else {
-      res.status(200).json(results.rows[0]);
+      const userData = results.rows[0]; // Assuming the user data is in the first row of the query results
+      res.status(200).json(userData);
     }
   });
-
-  // Return the current user's data
-  // return res.status(200).json(currentUser);
 };
 
 const create = async (req, res, next) => {

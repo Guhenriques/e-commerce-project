@@ -26,24 +26,22 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
-      console.log('Response do Login:', response)
-
+  
       if (!response.ok) {
         // Handle login error
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
-
-      // Login successful      
-      const user = await response.json();
-      console.log('User logged in with ID:', user.id);
-
-      console.log('Response do User:', user)
-
+  
+      const { user } = await response.json();
+  
+      if (user) {
+        localStorage.setItem('token', JSON.stringify(user));
+      } else {
+        console.log('Not receiving a user');
+      }
+  
       navigate('/dashboard');
-
-      // Redirect the user to the dashboard or perform any other necessary actions
     } catch (error) {
       console.error('Login failed:', error.message);
       setError(error.message); // Set the error message to display to the user

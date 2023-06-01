@@ -11,17 +11,37 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/users/current-user/11');
+        const userData = localStorage.getItem('token'); // Retrieve the token from local storage
+        if (!userData) {
+          throw new Error('Authentication token not found');
+        }
+
+        const tokenObject = JSON.parse(userData);
+        const userId = tokenObject.id;
+
+        console.log('Token User Id:', userId);
+
+        /*
+        const response = await fetch(`http://localhost:8000/users/current-user/`, {
+          headers: {
+            Authorization: `Bearer ${tokenData}`, // Pass the token in the request headers
+          },
+        });
+        console.log('Response: do Fetch', response); // Check the response object
+        
+        
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
-        const userData = await response.json();
 
-        console.log('userData:', userData)
-        
-        setUser(userData);
+        */
+        console.log('tokenObject:', tokenObject);
+
+        setUser(tokenObject);
         setLoading(false);
+
       } catch (error) {
+        console.error('Error:', error); // Log the error for debugging
         setError(error.message);
         setLoading(false);
       }
@@ -38,6 +58,7 @@ const Dashboard = () => {
     return <div>Error: {error}</div>;
   }
 
+
   return (
     <div className='dashboard'>
       <div className='dashboard-header'>
@@ -51,9 +72,6 @@ const Dashboard = () => {
         )}
         <nav>
           <ul>
-            <li>
-              <Link to='/profile'>Profile</Link>
-            </li>
             <li>
               <Link to='/orders'>Orders</Link>
             </li>
