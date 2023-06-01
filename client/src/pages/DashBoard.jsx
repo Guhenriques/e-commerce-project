@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './dashboard.css';
 
@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -16,28 +17,30 @@ const Dashboard = () => {
           throw new Error('Authentication token not found');
         }
 
-        const tokenObject = JSON.parse(userData);
-        const userId = tokenObject.id;
+        const tokenObject = JSON.parse(userData); // Parse the token to a Json object
+        const userId = tokenObject.id; 
 
-        console.log('Token User Id:', userId);
-
-        /*
-        const response = await fetch(`http://localhost:8000/users/current-user/`, {
+        const response = await fetch(`http://localhost:8000/users/${userId}`, { // Using the userId took from the userData object, make a response to the server using the id already known
           headers: {
-            Authorization: `Bearer ${tokenData}`, // Pass the token in the request headers
+            Authorization: `Bearer ${userData}`,
           },
         });
-        console.log('Response: do Fetch', response); // Check the response object
-        
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
 
-        */
-        console.log('tokenObject:', tokenObject);
+        const userDataResponse = await response.json();
 
-        setUser(tokenObject);
+        console.log('tokenObject:', tokenObject);
+        console.log('UserDataResponse:', userDataResponse)
+
+        if (userDataResponse.length > 0) {
+          const userObject = userDataResponse[0];
+          console.log('User:', userObject);
+        }
+
+        setUser(userDataResponse[0]);
         setLoading(false);
 
       } catch (error) {
@@ -50,6 +53,11 @@ const Dashboard = () => {
     fetchUserData();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/users/login');
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -57,7 +65,6 @@ const Dashboard = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
 
   return (
     <div className='dashboard'>
@@ -80,6 +87,9 @@ const Dashboard = () => {
             </li>
             <li>
               <Link to='/edit-address'>Edit Address</Link>
+            </li>
+            <li>
+              <button onClick={handleLogout}>Logout</button> {/* Add the logout button */}
             </li>
           </ul>
         </nav>
