@@ -26,6 +26,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pg": "^8.11.0",
+    "react-redux": "^8.0.7",
+    "redux": "^4.2.1",
     "swagger-ui-express": "^4.6.3"
   }
 }
