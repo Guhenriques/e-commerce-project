@@ -1,3 +1,5 @@
 /node_modules
 .env
 /client/src/images
+
+/node_modules;

@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+// Main components imports
 import NavBar from './components/NavBar';
 
+// Shop related imports
 import Shop from './pages/shop/Shop';
-import { Cart } from './pages/cart/Cart';
-import { ShopContextProvider } from './context/shop-context';
+import Cart from './pages/cart/Cart';
+import ShopContextProvider from './context/shop-context';
 
+// Users manipulation imports
 import Registration from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/DashBoard';

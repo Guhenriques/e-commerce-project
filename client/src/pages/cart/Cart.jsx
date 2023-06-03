@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './cart.css';
 
-export const Cart = () => {
+const Cart = () => {
   const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   
@@ -39,3 +39,5 @@ export const Cart = () => {
   )
 
 };
+
+export default Cart;

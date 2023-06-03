@@ -12,7 +12,7 @@ const getDefaultCart = () => {
   return cart;
 }
 
-export const ShopContextProvider = (props) => {
+const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
   const getTotalCartAmount = () => {
@@ -52,3 +52,5 @@ export const ShopContextProvider = (props) => {
     </ShopContext.Provider>
   );
 };
+
+export default ShopContextProvider;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './register.css'
 
@@ -8,6 +8,7 @@ const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -44,8 +45,8 @@ const Registration = () => {
       // Authenticate the user and create a session
       await handleAuthentication(email, password);
 
-      // Redirect the user to the login page or perform any other necessary actions
-      window.location.href = '/dashboard'; // Example redirect to '/logged-in' page
+      // Redirect the user to dashboard
+      navigate('/dashboard') 
 
     } catch (error) {
       console.error('Registration failed:', error.message);
@@ -71,8 +72,16 @@ const Registration = () => {
       }
 
       // Authentication successful
+      const { user } = await response.json();
+
+      if (user) {
+        localStorage.setItem('token', JSON.stringify(user));
+      } else {
+        console.log('Not receiving a user!');
+      }
+
       // Redirect the user to the logged-in page or perform any other necessary actions
-      window.location.href = '/logged-in'; // Example redirect to '/logged-in' page
+      navigate('/dashboard'); 
 
     } catch (error) {
       console.error('Authentication failed:', error.message);
