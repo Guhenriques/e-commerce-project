@@ -2,8 +2,8 @@
 
 ## Status
 
-#This project is discontinued. I made a new one, please check:
-- #[Heading link](https://github.com/Guhenriques/e-commerce "E-commerce MERN")
+This project is discontinued. I'm working in a new one, please check:
+- #[E-commerce MERN](https://github.com/Guhenriques/e-commerce "E-commerce MERN")
 
 
 
